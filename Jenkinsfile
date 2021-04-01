@@ -16,18 +16,6 @@ stage('Run') {
             if (hyVeeLincoln != '') {
                 error(hyVeeLincoln)
             }
-
-            sh 'jq \'.features[].properties | select(.provider_brand_id==1338) | select(.city=="Omaha") | select(.appointments_available_all_doses==true)\' NE.json > results.txt'
-            def hyVeeOmaha = readFile(file: 'results.txt')
-            if (hyVeeOmaha != '') {
-                error(hyVeeOmaha)
-            }
-
-            sh 'jq \'.features[].properties | select(.provider_brand_id==70) | select(.city=="Omaha") | select(.appointments_available_all_doses==true)\' NE.json > results.txt'
-            def walmartOmaha = readFile(file: 'results.txt')
-            if (walmartOmaha != '') {
-                error(walmartOmaha)
-            }
         } catch (err) {
             currentBuild.result = "FAILURE"
 
